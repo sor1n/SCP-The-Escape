@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import net.PhuckYuToo.TheEscape.Main;
+import net.PhuckYuToo.TheEscape.Sheet;
 import net.PhuckYuToo.TheEscape.Vector2D;
 
 import org.newdawn.slick.Color;
@@ -14,7 +15,7 @@ import org.newdawn.slick.opengl.Texture;
 
 public class MainMenu 
 {
-	private Texture bg, bar, guy;
+	private Texture bg, bar;
 	private int textureX, titleX;
 	private float xSpeed = 0.0f;
 	private TrueTypeFont title = Main.getFont(52), version = Main.getFont(40);
