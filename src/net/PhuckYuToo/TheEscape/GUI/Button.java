@@ -18,7 +18,7 @@ public class Button extends GUIComponent
 	private Texture texture;
 	private String text;
 	private TrueTypeFont font = Main.getFont(45f);
-	private boolean isHover = false, isClicked = false;
+	private boolean isHover = false, isClicked = false, hasBeenClicked = false;
 	
 	public Button(Vector2D pos, float width, float height, String txt)
 	{
@@ -37,10 +37,30 @@ public class Button extends GUIComponent
 		return Main.intBetween(Mouse.getX(), pos.getX()*(int)width, pos.getX()*(int)width + getButtonWidth()*(int)width) && Main.intBetween(Mouse.getY(), Main.HEIGHT - pos.getY()*(int)height - getButtonHeight()*(int)height, Main.HEIGHT - pos.getY()*(int)height);
 	}
 	
+	public boolean hasMouseBeenReleased()
+	{
+		if(hasBeenClicked && !Mouse.isButtonDown(0)){
+			hasBeenClicked = false;
+			if(isMouseOver()) return true;
+		}
+		return false;
+	}
+	
 	public void tick(int delta)
 	{
 		if(isMouseOver()) isHover = true;
 		else isHover = false;
+		if(Mouse.isButtonDown(0) && isMouseOver()){
+			isClicked = true;
+			hasBeenClicked = true;
+		}
+		else isClicked = false;
+		if(hasMouseBeenReleased()) onButtonClicked();
+	}
+	
+	public void onButtonClicked()
+	{
+		Main.consoleError(text);
 	}
 	
 	public void render()
@@ -61,7 +81,9 @@ public class Button extends GUIComponent
 		glEnd();
 		glDisable(GL_TEXTURE_2D);
 		new Color(1f, 1f, 1f, 0.1f).bind();
-		if(isHover) glRecti(pos.getX(), pos.getY(), pos.getX() + getButtonWidth(), pos.getY() + getButtonHeight());
+		if(isHover && !isClicked) glRecti(pos.getX(), pos.getY(), pos.getX() + getButtonWidth(), pos.getY() + getButtonHeight());
+		new Color(0.6f, 0f, 0f, 0.3f).bind();
+		if(isClicked) glRecti(pos.getX(), pos.getY(), pos.getX() + getButtonWidth(), pos.getY() + getButtonHeight());
 		glPopMatrix();
 		font.drawString(pos.getX() + ((getButtonWidth() * width) / 2) - (font.getWidth(text) / 2) + 10, pos.getY() * height + 7, text, Color.white);
 	}
