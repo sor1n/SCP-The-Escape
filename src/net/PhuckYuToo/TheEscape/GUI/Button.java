@@ -37,6 +37,9 @@ public class Button extends GUIComponent
 	{
 		if(/*Main.intBetween(Mouse.getX(), pos.getX() + 5, pos.getX() + (int)(getButtonWidth() * width) + 5) && */Main.intBetween(Mouse.getY(), Main.HEIGHT - pos.getY(), (pos.getY()))) isHover = true;
 		else isHover = false;
+		
+		if(isHover && Mouse.isButtonDown(0)) isClicked = true;
+		else isClicked = false;
 	}
 	
 	public void render()
@@ -75,5 +78,10 @@ public class Button extends GUIComponent
 	public int getButtonWidth()
 	{
 		return texture.getTextureWidth();
+	}
+	
+	public boolean isClicked()
+	{
+		return isClicked;
 	}
 }
