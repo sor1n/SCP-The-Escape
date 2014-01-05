@@ -4,6 +4,7 @@ import static org.lwjgl.opengl.GL11.*;
 import java.util.Random;
 import net.PhuckYuToo.TheEscape.Main;
 import net.PhuckYuToo.TheEscape.Vector2D;
+import net.PhuckYuToo.TheEscape.audio.SoundSystem;
 
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.Color;
@@ -60,7 +61,7 @@ public class Button extends GUIComponent
 	
 	public void onButtonClicked()
 	{
-		Main.consoleError(text);
+		SoundSystem.Sound.CLICK.playSound(1f, 1f, false);
 	}
 	
 	public void render()
