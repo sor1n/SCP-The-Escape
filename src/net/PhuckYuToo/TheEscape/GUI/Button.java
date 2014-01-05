@@ -5,6 +5,8 @@ import java.util.Random;
 import net.PhuckYuToo.TheEscape.Main;
 import net.PhuckYuToo.TheEscape.Vector2D;
 
+import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.opengl.Texture;
@@ -17,6 +19,7 @@ public class Button extends GUIComponent
 	private Texture texture;
 	private String text;
 	private TrueTypeFont font = Main.getFont(45f);
+	private boolean isHover = false, isClicked = false;
 	
 	public Button(Vector2D pos, float width, float height, String txt)
 	{
@@ -32,7 +35,8 @@ public class Button extends GUIComponent
 	
 	public void tick(int delta)
 	{
-		
+		if(/*Main.intBetween(Mouse.getX(), pos.getX() + 5, pos.getX() + (int)(getButtonWidth() * width) + 5) && */Main.intBetween(Mouse.getY(), Main.HEIGHT - pos.getY(), (pos.getY()))) isHover = true;
+		else isHover = false;
 	}
 	
 	public void render()
@@ -52,6 +56,8 @@ public class Button extends GUIComponent
 		glVertex2f(texture.getImageWidth() + pos.getX(), pos.getY());
 		glEnd();
 		glDisable(GL_TEXTURE_2D);
+		new Color(1f, 1f, 1f, 0.1f).bind();
+		if(isHover) glRecti(pos.getX(), pos.getY(), pos.getX() + getButtonWidth(), pos.getY() + getButtonHeight());
 		glPopMatrix();
 		font.drawString(pos.getX() + ((getButtonWidth() * width) / 2) - (font.getWidth(text) / 2) + 10, pos.getY() * height + 7, text, Color.white);
 	}
