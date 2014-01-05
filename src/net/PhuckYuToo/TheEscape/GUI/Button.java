@@ -6,7 +6,6 @@ import net.PhuckYuToo.TheEscape.Main;
 import net.PhuckYuToo.TheEscape.Vector2D;
 
 import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.opengl.Texture;
@@ -33,9 +32,14 @@ public class Button extends GUIComponent
 		texture = textures[new Random().nextInt(textures.length)];
 	}
 	
+	public boolean isMouseOver()
+	{
+		return Main.intBetween(Mouse.getX(), pos.getX()*(int)width, pos.getX()*(int)width + getButtonWidth()*(int)width) && Main.intBetween(Mouse.getY(), Main.HEIGHT - pos.getY()*(int)height - getButtonHeight()*(int)height, Main.HEIGHT - pos.getY()*(int)height);
+	}
+	
 	public void tick(int delta)
 	{
-		if(/*Main.intBetween(Mouse.getX(), pos.getX() + 5, pos.getX() + (int)(getButtonWidth() * width) + 5) && */Main.intBetween(Mouse.getY(), Main.HEIGHT - pos.getY(), (pos.getY()))) isHover = true;
+		if(isMouseOver()) isHover = true;
 		else isHover = false;
 	}
 	

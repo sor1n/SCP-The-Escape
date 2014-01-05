@@ -38,9 +38,9 @@ public class MainMenu
 		textureX = -bar.getTextureWidth();
 		titleX = Main.WIDTH;
 		getGUIComponents().add(play);
-//		getGUIComponents().add(options);
-//		getGUIComponents().add(credits);
-//		getGUIComponents().add(exit);
+		getGUIComponents().add(options);
+		getGUIComponents().add(credits);
+		getGUIComponents().add(exit);
 	}
 
 	public void tick(int delta)
