@@ -1,8 +1,5 @@
 package net.PhuckYuToo.TheEscape.audio;
 
-import net.PhuckYuToo.TheEscape.Main;
-
-import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.openal.Audio;
 import org.newdawn.slick.openal.AudioLoader;
 import org.newdawn.slick.openal.SoundStore;
@@ -12,7 +9,12 @@ public class SoundSystem
 {
 	public enum Sound
 	{
-		SCP096CRY("096_cry.ogg");
+		SCP096_CRY("096_cry"), SCP096_SCREAM("096_scream"), SCP127("127"),
+		ABLE1("able1"), ABLE2("able2"), ABLE_DOOR("abledoor"), ALARM("alarm"),
+		BEHIND_YOU("behindyou"), BRASS1("brass1"), BRASS2("brass2"), BRASS3("brass3"),
+		CLICK_SETTING("click_setting"), CLICK("click"), COWBELL("cowbell"), DEATH_MTF("death_mtf"),
+		FIRE_CRACK("fireCrackling"), FLAME("flame"), FRESHMEAT("FreshMeat"), HURT("hurt"),
+		LOOKUP("lookup"), OLDMAN_DRAG("oldmandrag"), RELOAD("reload_gun"), SHOT("shot"), WORTHOFLIFE("worthoflife");
 		
 		Sound(String path)
 		{
@@ -26,7 +28,7 @@ public class SoundSystem
 				// or setting up a stream to read from. Note that the argument becomes
 				// a URL here so it can be reopened when the stream is complete. Probably
 				// should have reset the stream by thats not how the original stuff worked
-				ogg = AudioLoader.getStreamingAudio("OGG", ResourceLoader.getResource("sounds/" + path));
+				ogg = AudioLoader.getStreamingAudio("OGG", ResourceLoader.getResource("sounds/" + path + ".ogg"));
 			} 
 			catch(Exception e) {}
 		}
@@ -60,11 +62,22 @@ public class SoundSystem
 		{
 			SoundStore.get().setSoundVolume(vol);
 		}
+		public static float getSoundVolume()
+		{
+			return SoundStore.get().getSoundVolume();
+		}
 	}
 	
 	public enum Music
 	{
-		MAIN("TheEscape.ogg");
+		MAIN("TheEscape"), CLASSDTHEME("StruggleAgainstUnknown"),
+		S058THEME("SCP-058"), ABLETHEME("SCP-076-2"),
+		S073THEME("SCP-073"), S999THEME("SCP-999"),
+		S1000THEME("SCP-1000"), S990THEME("SCP-990"),
+		S079THEME("SCP-079"), S106THEME("SCP-106"),
+		S629THEME("SCP-629"), S420JTHEME("SCP-420-J"),
+		S096THEME("SCP-096"), S080THEME("SCP-080"),
+		S966THEME("SCP-966");
 		
 		Music(String path)
 		{
@@ -78,7 +91,7 @@ public class SoundSystem
 				// or setting up a stream to read from. Note that the argument becomes
 				// a URL here so it can be reopened when the stream is complete. Probably
 				// should have reset the stream by thats not how the original stuff worked
-				ogg = AudioLoader.getStreamingAudio("OGG", ResourceLoader.getResource("sounds/music/" + path));
+				ogg = AudioLoader.getStreamingAudio("OGG", ResourceLoader.getResource("sounds/music/" + path + ".ogg"));
 			} 
 			catch(Exception e) {}
 		}
@@ -110,11 +123,11 @@ public class SoundSystem
 		}
 		public static void setMusicVolume(float vol)
 		{
-			SoundStore.get().setMusicVolume(vol);
+			SoundStore.get().setCurrentMusicVolume(vol);
 		}
 		public static float getMusicVolume()
 		{
-			return SoundStore.get().getMusicVolume();
+			return SoundStore.get().getCurrentMusicVolume();
 		}
 	}
 
@@ -123,25 +136,6 @@ public class SoundSystem
 	 */
 	public void tick(int delta)
 	{
-		if(!Music.MAIN.isPlaying()) Music.MAIN.playMusic(1f, 1f, false);
-		Main.consoleMessage(Music.getMusicVolume());
-		while(Keyboard.next())
-		{
-			if(Keyboard.getEventKeyState())
-			{
-				if(Keyboard.getEventKey() == Keyboard.KEY_Q)
-				{
-					Main.consoleError("Q");
-					Music.setMusicVolume(2.0f);
-				}
-				if(Keyboard.getEventKey() == Keyboard.KEY_W)
-				{
-					Main.consoleError("W");
-					Music.setMusicVolume(1.0f);
-				}
-			}
-		}
-
 		// polling is required to allow streaming to get a chance to
 		// queue buffers.
 		SoundStore.get().poll(0);
