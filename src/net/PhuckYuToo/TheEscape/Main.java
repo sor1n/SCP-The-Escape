@@ -352,4 +352,10 @@ public class Main
 		catch(Exception e) {}	
 		return null;
 	}
+	
+	public static boolean intBetween(int a, int min, int max)
+	{
+		if(a > min && a < max) return true;
+		else return false;
+	}
 }
