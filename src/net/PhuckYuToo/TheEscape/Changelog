@@ -1,0 +1,35 @@
+		v0.3.1: 
+- Redone the Audio system of the game to make the game more lightweight.
+- Made the main menu theme play on startup instead of after the intro animation.
+
+		TODOs:
+- Fix SCP-058 controls
+- Disguise command
+- Difficulty setting?
+- Finish saving/loading
+- Ending for each mode (Class-D = [X], SCP-058 = [])
+- Add SCP-027, SCP-990, SCP-008, SCP-1000.
+- Make S-Nav? :D
+- Add le pocket dimension
+- Songs for SCP-015, SCP-019, SCP-008, SCP-027, SCP-173, SCP-131, SCP-060, SCP-457, SCP-513, SCP-049
+- Add moar items
+- Add SCP-079, SCP-015, SCP-294, SCP-409
+- Add elevators
+- Add new Game stories/levels
+- Add Item Rarity :)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
