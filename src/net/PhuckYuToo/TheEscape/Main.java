@@ -63,11 +63,11 @@ public class Main
 
 	//Declaration
 	public static MainMenu menu;
-	public static SoundSystem sound;
+	public static SoundSystem soundSystem;
 
 	public void init()
 	{
-		sound = new SoundSystem();
+		soundSystem = new SoundSystem();
 		menu = new MainMenu();
 	}
 
@@ -113,11 +113,12 @@ public class Main
 			Display.update();
 			Display.sync(60); // cap fps to 60fps
 		}
-		stop();
+		close();
 	}
 	
-	public void stop()
+	public void close()
 	{
+		Main.consoleMessage("You closed me :c");
 		Display.destroy();
 	}
 
@@ -135,8 +136,8 @@ public class Main
 	public void tick(int delta)
 	{
 		if(menu != null) menu.tick(delta);
-		if(sound != null) sound.tick(delta);
-		while(Keyboard.next())
+		soundSystem.tick(delta);
+		while(Keyboard.isCreated() && Keyboard.next())
 		{
 			if(Keyboard.getEventKeyState())
 			{

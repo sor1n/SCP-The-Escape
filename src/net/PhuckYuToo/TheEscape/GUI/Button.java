@@ -4,6 +4,7 @@ import static org.lwjgl.opengl.GL11.*;
 import java.util.Random;
 import net.PhuckYuToo.TheEscape.Main;
 import net.PhuckYuToo.TheEscape.Vector2D;
+import net.PhuckYuToo.TheEscape.audio.SoundSystem.Sound;
 
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.Color;
@@ -50,11 +51,9 @@ public class Button extends GUIComponent
 	{
 		if(isMouseOver()) isHover = true;
 		else isHover = false;
-<<<<<<< HEAD
 		
 		if(isHover && Mouse.isButtonDown(0)) isClicked = true;
 		else isClicked = false;
-=======
 		if(Mouse.isButtonDown(0) && isMouseOver()){
 			isClicked = true;
 			hasBeenClicked = true;
@@ -65,8 +64,7 @@ public class Button extends GUIComponent
 	
 	public void onButtonClicked()
 	{
-		Main.consoleError(text);
->>>>>>> 35eaed0dbf366dd528b051bcbcee6b98e1a07643
+		Main.soundSystem.playSound(Sound.CLICK, 1f, Options.SOUND_VOL, false);
 	}
 	
 	public void render()
