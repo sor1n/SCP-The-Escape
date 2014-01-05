@@ -1,5 +1,7 @@
 package net.PhuckYuToo.TheEscape.audio;
 
+import net.PhuckYuToo.TheEscape.GUI.Options;
+
 import org.newdawn.slick.openal.Audio;
 import org.newdawn.slick.openal.AudioLoader;
 import org.newdawn.slick.openal.SoundStore;
@@ -13,9 +15,14 @@ public class SoundSystem
 		Music.values();
 	}
 	
-	public void playSound(Sound sound, float pitch, float gain, boolean loop)
+	public void setSoundVol(float vol)
 	{
-		sound.playSound(pitch, gain, loop);
+		Sound.setSoundVolume(vol);
+	}
+	
+	public void setMusicVol(float vol)
+	{
+		Music.setMusicVolume(vol);
 	}
 	
 	public enum Sound
@@ -147,6 +154,7 @@ public class SoundSystem
 	 */
 	public void tick(int delta)
 	{
+		setMusicVol(Options.SOUND_VOL);
 		// polling is required to allow streaming to get a chance to
 		// queue buffers.
 		SoundStore.get().poll(0);
