@@ -16,4 +16,12 @@ public abstract class GUIComponent
 	{
 		
 	}
+	
+	public void onUpdate()
+	{
+	}
+	
+	public void refreshFont()
+	{
+	}
 }

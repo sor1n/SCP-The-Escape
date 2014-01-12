@@ -1,17 +1,8 @@
 package net.TheEscape.Client.render;
 
-import static org.lwjgl.opengl.GL11.GL_LINES;
-import static org.lwjgl.opengl.GL11.GL_QUADS;
-import static org.lwjgl.opengl.GL11.glBegin;
-import static org.lwjgl.opengl.GL11.glColor3f;
-import static org.lwjgl.opengl.GL11.glEnd;
-import static org.lwjgl.opengl.GL11.glLineWidth;
-import static org.lwjgl.opengl.GL11.glPopMatrix;
-import static org.lwjgl.opengl.GL11.glPushMatrix;
-import static org.lwjgl.opengl.GL11.glScalef;
-import static org.lwjgl.opengl.GL11.glTexCoord2f;
-import static org.lwjgl.opengl.GL11.glVertex2f;
+import static org.lwjgl.opengl.GL11.*;
 import net.TheEscape.Client.Vector2D;
+import net.TheEscape.Client.ClassD.Tile;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.opengl.Texture;
@@ -31,6 +22,47 @@ public class Render
 		glVertex2f(sizeX + x, sizeY + y);
 		glTexCoord2f(1, 0); // top right
 		glVertex2f(sizeX + x, y);
+		glEnd();
+		glPopMatrix();
+	}
+	
+	public static void drawTile(float x, float y, Tile tile, float scale)
+	{
+		glColor3f(1f, 1f, 1f);
+		glPushMatrix();
+		glLoadIdentity();
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glScalef(scale, scale, 1f);
+		glEnable(GL_TEXTURE_2D);
+		tile.getTexture().bind();
+		glBegin(GL_QUADS);
+		glTexCoord2f(0, 0); // top left
+		glVertex2f(x, y);
+		glTexCoord2f(0, 1); // bottom left 
+		glVertex2f(x, y + Tile.TILE_SIZE);
+		glTexCoord2f(1, 1); // bottom right
+		glVertex2f(x + Tile.TILE_SIZE, y + Tile.TILE_SIZE);
+		glTexCoord2f(1, 0); // top right
+		glVertex2f(x + Tile.TILE_SIZE, y);
+		glEnd();
+	}
+	
+	public static void drawTriangle(float x, float y, int sizeX, int sizeY, float r, float g, float b, float angle, float rX, float rY, float rZ)
+	{
+		glPushMatrix();
+		glColor3f(r, g, b);
+		glBegin(GL_QUADS);
+		glTranslatef(1f, 1f, 1f);
+		glLoadIdentity();
+		glRotatef(angle, rX, rY, rZ);
+		glTexCoord2f(0, 0); // top left
+		glVertex2f(x + (sizeX / 2), y);
+		glTexCoord2f(0, 1); // bottom left 
+		glVertex2f(x, sizeY + y);
+		glTexCoord2f(1, 1); // bottom right
+		glVertex2f(sizeX + x, sizeY + y);
+		glTexCoord2f(1, 0); // top right
+		glVertex2f(x + (sizeX / 2), y);
 		glEnd();
 		glPopMatrix();
 	}

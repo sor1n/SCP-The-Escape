@@ -93,4 +93,10 @@ public class Slider extends GUIComponent
 	{
 		Sound.CLICK_SETTING.playSound(1f);
 	}
+	
+	public void refreshFont()
+	{
+		font = Main.getFont(35f);
+		smallFont = Main.getFont(27f);
+	}
 }

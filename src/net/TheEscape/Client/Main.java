@@ -31,6 +31,7 @@ import java.util.Calendar;
 import javax.imageio.ImageIO;
 
 import net.TheEscape.Client.Class3D.Raycast;
+import net.TheEscape.Client.ClassD.World;
 import net.TheEscape.Client.GUI.MainMenu;
 import net.TheEscape.Client.GUI.Options;
 import net.TheEscape.Client.audio.SoundSystem;
@@ -71,6 +72,7 @@ public class Main
 	public static Options optionsMenu;
 	public static SoundSystem soundSystem;
 	public static Raycast ray;
+	public static World world;
 
 	public void init()
 	{
@@ -147,6 +149,7 @@ public class Main
 		if(menu != null) menu.tick(delta);
 		if(ray != null) ray.tick(delta);
 		if(optionsMenu != null) optionsMenu.tick(delta);
+		if(world != null) world.tick(delta);
 		soundSystem.tick(delta);
 		while(Keyboard.isCreated() && Keyboard.next())
 		{
@@ -164,12 +167,18 @@ public class Main
 		}
 		updateFPS();
 	}
+	
+	public void refreshFonts()
+	{
+		menu.refreshFont();
+	}
 
 	public void render()
 	{
 		if(menu != null) menu.render();
 		if(optionsMenu != null) optionsMenu.render();
 		if(ray != null) ray.render();
+		if(world != null) world.render();
 	}
 
 	public static void main(String args[])
@@ -346,6 +355,12 @@ public class Main
 		if(i <= 0) return false;
 		else return true;
 	}
+	
+	public static int booleanToInt(boolean b)
+	{
+		if(b) return 1;
+		else return 0;
+	}
 
 	/**
 	 * Get a new instance of the main font.
@@ -419,5 +434,10 @@ public class Main
 	public void start3DClassD() //TODO: after Char selection
 	{
 		ray = new Raycast();
+	}
+	
+	public void startClassD()
+	{
+		world = new World(true, 180, 180);
 	}
 }

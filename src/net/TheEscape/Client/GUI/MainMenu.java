@@ -27,7 +27,7 @@ public class MainMenu extends GUI
 		{
 			super.onClicked();
 			Main.optionsMenu.setActive(false);
-			Main.gameInstance.start3DClassD();
+			Main.gameInstance.startClassD();
 			isActive = false;
 		}
 		public void add()
@@ -98,6 +98,14 @@ public class MainMenu extends GUI
 			if(xSpeed < 16f) xSpeed += 0.4f;
 			for(int i = 0; i < getGUIComponents().size(); i++) getGUIComponents().get(i).tick(delta);
 		}
+	}
+	
+	public void refreshFont()
+	{
+		for(int i = 0; i < getGUIComponents().size(); i++) getGUIComponents().get(i).refreshFont();
+		title = Main.getFont(52);
+		version = Main.getFont(40);
+		options.refreshFont();
 	}
 
 	public void render()

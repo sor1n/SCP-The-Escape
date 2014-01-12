@@ -117,4 +117,9 @@ public class Button extends GUIComponent
 		for(Texture t : textures) t.release();
 		texture.release();
 	}
+	
+	public void refreshFont()
+	{
+		font = Main.getFont(45f);
+	}
 }

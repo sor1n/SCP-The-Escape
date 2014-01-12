@@ -1,7 +1,6 @@
 package net.TheEscape.Client.Class3D;
 
 import net.TheEscape.Client.Main;
-import net.TheEscape.Client.Vector2D;
 import net.TheEscape.Client.render.Render;
 
 import org.lwjgl.input.Keyboard;
@@ -55,22 +54,19 @@ public class Raycast
 	int fPlayerMapX, fPlayerMapY, fMinimapWidth;
 
 	// movement flag
-	boolean fKeyUp=false;
-	boolean fKeyDown=false;
-	boolean fKeyLeft=false;
-	boolean fKeyRight=false;
+	boolean fKeyUp = false;
+	boolean fKeyDown = false;
+	boolean fKeyLeft = false;
+	boolean fKeyRight = false;
 
 	// 2 dimensional map
 	byte fMap[];
-	static final byte W=1;                                // wall
-	static final byte O=0;                                // opening
-	static final int MAP_WIDTH=12;
-	static final int MAP_HEIGHT=12;
+	static final byte W = 1;                                // wall
+	static final byte O = 0;                                // opening
+	static final int MAP_WIDTH = 12;
+	static final int MAP_HEIGHT = 12;
 
-	//*******************************************************************//
-	//* Convert arc to radian
-	//*******************************************************************//
-	float arcToRad(float arcAngle)
+	public float arcToRad(float arcAngle)
 	{
 		return ((float)(arcAngle*Math.PI)/(float)ANGLE180);    
 	}
@@ -206,7 +202,7 @@ public class Raycast
 		else fKeyLeft = false;
 		
 		// rotate left
-		if(fKeyLeft) //TODO
+		if(fKeyLeft)
 		{
 			if((fPlayerArc -= ANGLE5 / 2) < ANGLE0) fPlayerArc += ANGLE360;
 		}
@@ -252,10 +248,10 @@ public class Raycast
 //		}
 	}
 
-	public void drawBackground() //TODO
+	public void drawBackground()
 	{
 		// sky
-		int c = 25;
+		int c = 0;
 		int r;
 		for(r = 0; r < PROJECTIONPLANEHEIGHT / 2; r += 10)
 		{
@@ -263,8 +259,8 @@ public class Raycast
 //			fOffscreenGraphics.fillRect(0, r, PROJECTIONPLANEWIDTH, 10);
 			//glColor3f(0f, 0.2f, 1f);
 			GL11.glDisable(GL11.GL_TEXTURE_2D);
-			Render.drawRectangle(0, r, PROJECTIONPLANEWIDTH, 10, c, 125, 225);
-			c += 0.001f;
+			Render.drawRectangle(0, r, PROJECTIONPLANEWIDTH, 10, c, 25, 25);
+			c++;
 		}
 		// ground
 		c = 22;
@@ -281,7 +277,7 @@ public class Raycast
 	//*******************************************************************//
 	//* Draw map on the right side
 	//*******************************************************************//
-	public void drawOverheadMap() //TODO
+	public void drawOverheadMap()
 	{
 		fMinimapWidth = 10;
 		for(int u = 0; u < MAP_WIDTH; u++)
@@ -310,11 +306,15 @@ public class Raycast
 		// intersect with wall
 		
 		//fOffscreenGraphics.drawLine(fPlayerMapX, fPlayerMapY, (int)(PROJECTIONPLANEWIDTH+((float)(x*fMinimapWidth)/(float)TILE_SIZE)), (int)(((float)(y*fMinimapWidth)/(float)TILE_SIZE)));
-		Render.drawLine(new Vector2D(fPlayerMapX, fPlayerMapY), new Vector2D((int)(PROJECTIONPLANEWIDTH+((float)(x*fMinimapWidth)/(float)TILE_SIZE) - fMinimapWidth), (int)(((float)(y*fMinimapWidth)/(float)TILE_SIZE)) + fMinimapWidth), 0.7f, 0.2f, 0f);
+		//Render.drawRectangle(fPlayerMapX, fPlayerMapY, 4, 4, 1f, 1f, 0f);
+		
 		// draw a red line indication the player's direction
 		//fOffscreenGraphics.setColor(Color.red);
 		//fOffscreenGraphics.drawLine(fPlayerMapX, fPlayerMapY, (int)(fPlayerMapX+fCosTable[fPlayerArc]*10), (int)(fPlayerMapY+fSinTable[fPlayerArc]*10));
-		Render.drawLine(new Vector2D(fPlayerMapX, fPlayerMapY), new Vector2D((int)(fPlayerMapX+fCosTable[fPlayerArc]*10), (int)(fPlayerMapY+fSinTable[fPlayerArc]*10)), 1f, 0f, 0f);
+		//Render.drawLine(new Vector2D(fPlayerMapX, fPlayerMapY), new Vector2D((int)(fPlayerMapX+fCosTable[fPlayerArc]*10), (int)(fPlayerMapY+fSinTable[fPlayerArc]*10)), 1f, 1f, 0f);
+		Render.drawRectangle(fPlayerMapX, fPlayerMapY, 4, 4, 0f, 1f, 1f);
+		//Render.drawRectangle((int)(fPlayerMapX+fCosTable[fPlayerArc] * 10), (int)(fPlayerMapY+fSinTable[fPlayerArc]*10), 4, 4, 0f, 1f, 1f);
+		//Render.drawTriangle(Main.widthCenter, Main.heightCenter, 25, 25, 1f, 1f, 0f, fPlayerArc / ANGLE360, 0f, 0f, 1f);
 	}
 
 	public void render()

@@ -46,6 +46,7 @@ public class Tickbox extends GUIComponent
 	{
 		toggle = !toggle;
 		SoundSystem.Sound.CLICK_SETTING.playSound(1f);
+		onUpdate();
 	}
 	
 	public boolean isMouseOver()
@@ -92,5 +93,10 @@ public class Tickbox extends GUIComponent
 			if(isMouseOver()) return true;
 		}
 		return false;
+	}
+	
+	public void refreshFont()
+	{
+		font = Main.getFont(25f);
 	}
 }

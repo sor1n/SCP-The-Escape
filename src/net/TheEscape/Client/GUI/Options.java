@@ -68,6 +68,11 @@ public class Options extends GUI
 		{
 			getGUIComponents().add(this);
 		}
+		public void onUpdate()
+		{
+			Options.ANTI_ALIAS = Main.booleanToInt(getValue());
+			Main.gameInstance.refreshFonts();
+		}
 	};
 
 	public static synchronized List<GUIComponent> getGUIComponents()
@@ -82,6 +87,12 @@ public class Options extends GUI
 		musicVol.add();
 		back.add();
 		antiAlias.add();
+	}
+	
+	public void refreshFont()
+	{
+		font = Main.getFont(45f);
+		for(int i = 0; i < getGUIComponents().size(); i++) getGUIComponents().get(i).refreshFont();
 	}
 
 	public void tick(int delta)
