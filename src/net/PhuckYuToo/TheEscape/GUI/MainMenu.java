@@ -8,6 +8,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import net.PhuckYuToo.TheEscape.Main;
 import net.PhuckYuToo.TheEscape.Vector2D;
 
+import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.opengl.Texture;
@@ -37,6 +38,10 @@ public class MainMenu extends GUI
 		public void onButtonClicked()
 		{
 			super.onButtonClicked();
+			clearTextures();
+			credits.clearTextures();
+			play.clearTextures();
+			options.clearTextures();
 			Main.gameInstance.close();
 		}
 	};
