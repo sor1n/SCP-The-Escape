@@ -68,6 +68,10 @@ public class SoundSystem
 		{
 			ogg.playAsSoundEffect(pitch, gain, loop); //pitch, gain, loop
 		}
+		public void playSound(float pitch)
+		{
+			ogg.playAsSoundEffect(pitch, Options.SOUND_VOL, false); //pitch, gain, loop
+		}
 		public void stopSound()
 		{
 			ogg.stop();
@@ -130,6 +134,10 @@ public class SoundSystem
 		public void playMusic(float pitch, float gain, boolean loop)
 		{
 			ogg.playAsMusic(pitch, gain, loop); //pitch, gain, loop
+		}
+		public void playMusic(float pitch)
+		{
+			ogg.playAsMusic(pitch, Options.MUSIC_VOL, false); //pitch, gain, loop
 		}
 		public void stopMusic()
 		{

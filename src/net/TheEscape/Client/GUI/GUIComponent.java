@@ -11,4 +11,9 @@ public abstract class GUIComponent
 	{
 		
 	}
+	
+	public void add()
+	{
+		
+	}
 }

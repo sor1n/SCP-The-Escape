@@ -17,7 +17,7 @@ public class Options extends GUI
 	public static int ANTI_ALIAS = 1;
 	public static float SOUND_VOL = 1.0f, MUSIC_VOL = 1.0f;
 
-	private List<GUIComponent> guiComponents = new CopyOnWriteArrayList<GUIComponent>();
+	private static List<GUIComponent> guiComponents = new CopyOnWriteArrayList<GUIComponent>();
 
 	private Texture bg;
 	private TrueTypeFont font = Main.getFont(45f);
@@ -29,6 +29,10 @@ public class Options extends GUI
 			super.onUpdate();
 			SOUND_VOL = getValue() / 100;
 		}
+		public void add()
+		{
+			getGUIComponents().add(this);
+		}
 	};
 
 	private Slider musicVol = new Slider(new Vector2D(Main.widthCenter + 100, Main.heightCenter - 120), 200, 100, "Music Volume")
@@ -38,19 +42,35 @@ public class Options extends GUI
 			super.onUpdate();
 			MUSIC_VOL = getValue() / 100;
 		}
+		public void add()
+		{
+			getGUIComponents().add(this);
+		}
 	};
 
 	private Button back = new Button(new Vector2D(15, 15), 2f, 2f, "Back")
 	{
-		public void onButtonClicked()
+		public void onClicked()
 		{
-			super.onButtonClicked();
+			super.onClicked();
 			Main.menu.setActive(true);
 			isActive = false;
 		}
+		public void add()
+		{
+			getGUIComponents().add(this);
+		}
+	};
+	
+	private Tickbox antiAlias = new Tickbox(Main.widthCenter - 10, Main.heightCenter + 100, 40, 40, true, "Anti Alias")
+	{
+		public void add()
+		{
+			getGUIComponents().add(this);
+		}
 	};
 
-	public synchronized List<GUIComponent> getGUIComponents()
+	public static synchronized List<GUIComponent> getGUIComponents()
 	{
 		return guiComponents;
 	}
@@ -58,9 +78,10 @@ public class Options extends GUI
 	public Options()
 	{
 		bg = Main.loadPNG("Main");
-		getGUIComponents().add(soundVol);
-		getGUIComponents().add(musicVol);
-		getGUIComponents().add(back);
+		soundVol.add();
+		musicVol.add();
+		back.add();
+		antiAlias.add();
 	}
 
 	public void tick(int delta)

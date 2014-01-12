@@ -58,17 +58,18 @@ public class Button extends GUIComponent
 
 		if(isHover && Mouse.isButtonDown(0)) isClicked = true;
 		else isClicked = false;
-		if(Mouse.isButtonDown(0) && isMouseOver()){
+		if(Mouse.isButtonDown(0) && isMouseOver())
+		{
 			isClicked = true;
 			hasBeenClicked = true;
 		}
 		else isClicked = false;
-		if(hasMouseBeenReleased()) onButtonClicked();
+		if(hasMouseBeenReleased()) onClicked();
 	}
 
-	public void onButtonClicked()
+	public void onClicked()
 	{
-		Sound.CLICK.playSound(1f, Options.SOUND_VOL, false);
+		Sound.CLICK.playSound(1f);
 	}
 
 	public void render()

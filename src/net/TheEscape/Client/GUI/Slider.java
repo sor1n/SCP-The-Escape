@@ -91,6 +91,6 @@ public class Slider extends GUIComponent
 	
 	public void onUpdate()
 	{
-		Sound.CLICK_SETTING.playSound(1f, Options.SOUND_VOL, false);
+		Sound.CLICK_SETTING.playSound(1f);
 	}
 }

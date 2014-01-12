@@ -8,7 +8,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import net.TheEscape.Client.Main;
 import net.TheEscape.Client.Vector2D;
 
-import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.opengl.Texture;
@@ -20,33 +19,53 @@ public class MainMenu extends GUI
 	private float xSpeed = 0.0f;
 	private TrueTypeFont title = Main.getFont(52), version = Main.getFont(40);
 
-	private List<GUIComponent> guiComponents = new CopyOnWriteArrayList<GUIComponent>();
+	private static List<GUIComponent> guiComponents = new CopyOnWriteArrayList<GUIComponent>();
 
-	public Button play = new Button(new Vector2D(15, 70), 2f, 2f, "Play");
+	public Button play = new Button(new Vector2D(15, 70), 2f, 2f, "Play")
+	{
+		public void add()
+		{
+			getGUIComponents().add(this);
+		}
+	};
 	public Button options = new Button(new Vector2D(15, 70 + play.getButtonHeight() + 4), 2f, 2f, "Options")
 	{
-		public void onButtonClicked()
+		public void onClicked()
 		{
-			super.onButtonClicked();
+			super.onClicked();
 			Main.optionsMenu.setActive(true);
 			isActive = false;
 		}
+		public void add()
+		{
+			getGUIComponents().add(this);
+		}
 	};
-	public Button credits = new Button(new Vector2D(15, 70 + play.getButtonHeight() * 2 + 8), 2f, 2f, "Credits");
+	public Button credits = new Button(new Vector2D(15, 70 + play.getButtonHeight() * 2 + 8), 2f, 2f, "Credits")
+	{
+		public void add()
+		{
+			getGUIComponents().add(this);
+		}
+	};
 	public Button exit = new Button(new Vector2D(15, 70 + play.getButtonHeight() * 3 + 12), 2f, 2f, "Exit")
 	{
-		public void onButtonClicked()
+		public void onClicked()
 		{
-			super.onButtonClicked();
+			super.onClicked();
 			clearTextures();
 			credits.clearTextures();
 			play.clearTextures();
 			options.clearTextures();
 			Main.gameInstance.close();
 		}
+		public void add()
+		{
+			getGUIComponents().add(this);
+		}
 	};
 
-	public synchronized List<GUIComponent> getGUIComponents()
+	public static synchronized List<GUIComponent> getGUIComponents()
 	{
 		return guiComponents;
 	}
@@ -57,10 +76,10 @@ public class MainMenu extends GUI
 		bar = Main.loadPNG("Bar");
 		textureX = -bar.getTextureWidth();
 		titleX = Main.WIDTH;
-		getGUIComponents().add(play);
-		getGUIComponents().add(options);
-		getGUIComponents().add(credits);
-		getGUIComponents().add(exit);
+		play.add();
+		options.add();
+		credits.add();
+		exit.add();
 	}
 
 	public void tick(int delta)
