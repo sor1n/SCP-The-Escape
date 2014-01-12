@@ -25,18 +25,23 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.nio.ByteBuffer;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import javax.imageio.ImageIO;
 
+import net.TheEscape.Client.Class3D.Raycast;
 import net.TheEscape.Client.GUI.MainMenu;
 import net.TheEscape.Client.GUI.Options;
 import net.TheEscape.Client.audio.SoundSystem;
 
+import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.Sys;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
+import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.opengl.ImageIOImageData;
 import org.newdawn.slick.opengl.Texture;
@@ -65,6 +70,7 @@ public class Main
 	public static MainMenu menu;
 	public static Options optionsMenu;
 	public static SoundSystem soundSystem;
+	public static Raycast ray;
 
 	public void init()
 	{
@@ -118,7 +124,7 @@ public class Main
 		}
 		close();
 	}
-	
+
 	public void close()
 	{
 		Main.consoleMessage("You closed me :c");
@@ -139,6 +145,7 @@ public class Main
 	public void tick(int delta)
 	{
 		if(menu != null) menu.tick(delta);
+		if(ray != null) ray.tick(delta);
 		if(optionsMenu != null) optionsMenu.tick(delta);
 		soundSystem.tick(delta);
 		while(Keyboard.isCreated() && Keyboard.next())
@@ -152,6 +159,7 @@ public class Main
 					Display.setVSyncEnabled(vsync);
 					consoleMessage("vSync enabled: " + vsync);
 				}
+				else if(Keyboard.getEventKey() == Controls.SCREENSHOT) captureScreenshot();
 			}
 		}
 		updateFPS();
@@ -161,6 +169,7 @@ public class Main
 	{
 		if(menu != null) menu.render();
 		if(optionsMenu != null) optionsMenu.render();
+		if(ray != null) ray.render();
 	}
 
 	public static void main(String args[])
@@ -320,24 +329,24 @@ public class Main
 		try
 		{
 			Texture texture = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("res/" + name + ".png"));
-//			consoleMessage("Texture loaded: "+ texture);
-//			consoleMessage(">> Image width: "+ texture.getImageWidth());
-//			consoleMessage(">> Image height: "+ texture.getImageHeight());
-//			consoleMessage(">> Texture width: "+ texture.getTextureWidth());
-//			consoleMessage(">> Texture height: "+ texture.getTextureHeight());
-//			consoleMessage(">> Texture ID: "+ texture.getTextureID());
+			//			consoleMessage("Texture loaded: "+ texture);
+			//			consoleMessage(">> Image width: "+ texture.getImageWidth());
+			//			consoleMessage(">> Image height: "+ texture.getImageHeight());
+			//			consoleMessage(">> Texture width: "+ texture.getTextureWidth());
+			//			consoleMessage(">> Texture height: "+ texture.getTextureHeight());
+			//			consoleMessage(">> Texture ID: "+ texture.getTextureID());
 			return texture;
 		} 
 		catch(IOException e) {}
 		return null;
 	}
-	
+
 	public static boolean intToBoolean(int i)
 	{
 		if(i <= 0) return false;
 		else return true;
 	}
-	
+
 	/**
 	 * Get a new instance of the main font.
 	 * @param size The size of the font
@@ -358,10 +367,57 @@ public class Main
 		catch(Exception e) {}	
 		return null;
 	}
-	
+
 	public static boolean intBetween(int a, int min, int max)
 	{
 		if(a > min && a < max) return true;
 		else return false;
+	}
+
+	public static void captureScreenshot()
+	{
+		GL11.glReadBuffer(GL11.GL_FRONT);
+		int width = Display.getDisplayMode().getWidth();
+		int height= Display.getDisplayMode().getHeight();
+		int bpp = 4; // Assuming a 32-bit display with a byte each for red, green, blue, and alpha.
+		ByteBuffer buffer = BufferUtils.createByteBuffer(width * height * bpp);
+		GL11.glReadPixels(0, 0, width, height, GL11.GL_RGBA, GL11.GL_UNSIGNED_BYTE, buffer);
+		new File("C:/Users/" + System.getProperty("user.name") + "/PixelBolt/").mkdir();	
+		new File("C:/Users/" + System.getProperty("user.name") + "/PixelBolt/" + Main.TITLE + "/").mkdir();	
+		File file = new File("C:/Users/" + System.getProperty("user.name") + "/PixelBolt/" + Main.TITLE + "/SCP-TE - " + getDate() + ".png"); // The file to save to.
+		try
+		{
+			file.createNewFile();
+		}
+		catch(IOException e1) {e1.printStackTrace();}
+		String format = "PNG"; // Example: "PNG" or "JPG"
+		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+		for(int x = 0; x < width; x++)
+			for(int y = 0; y < height; y++)
+			{
+				int i = (x + (width * y)) * bpp;
+				int r = buffer.get(i) & 0xFF;
+				int g = buffer.get(i + 1) & 0xFF;
+				int b = buffer.get(i + 2) & 0xFF;
+				image.setRGB(x, height - (y + 1), (0xFF << 24) | (r << 16) | (g << 8) | b);
+			}
+		try
+		{
+			ImageIO.write(image, format, file);
+		} 
+		catch(IOException e) {e.printStackTrace();}
+	}
+	
+	public static String getDate()
+	{
+		Calendar cal = Calendar.getInstance();
+		cal.getTime();
+		SimpleDateFormat sdf = new SimpleDateFormat("y-MMM-d-HH.mm.s.S");
+		return String.valueOf(sdf.format(cal.getTime()));
+	}
+	
+	public void start3DClassD() //TODO: after Char selection
+	{
+		ray = new Raycast();
 	}
 }

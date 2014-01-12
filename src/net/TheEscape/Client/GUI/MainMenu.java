@@ -23,6 +23,13 @@ public class MainMenu extends GUI
 
 	public Button play = new Button(new Vector2D(15, 70), 2f, 2f, "Play")
 	{
+		public void onClicked()
+		{
+			super.onClicked();
+			Main.optionsMenu.setActive(false);
+			Main.gameInstance.start3DClassD();
+			isActive = false;
+		}
 		public void add()
 		{
 			getGUIComponents().add(this);
