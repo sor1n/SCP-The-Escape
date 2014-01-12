@@ -4,10 +4,10 @@ import static org.lwjgl.opengl.GL11.*;
 
 import java.util.Random;
 
+import net.DarkKnight.TheEscape.render.Render;
 import net.TheEscape.Client.Main;
 import net.TheEscape.Client.Vector2D;
 import net.TheEscape.Client.audio.SoundSystem.Sound;
-import net.TheEscape.Client.render.Render;
 
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.Color;
@@ -74,25 +74,10 @@ public class Button extends GUIComponent
 	public void render()
 	{
 		glDisable(GL_TEXTURE_2D);
-		glColor3f(1f, 1f, 1f);
 		glPushMatrix();
-		glScalef(width, height, 0f);
-		glEnable(GL_TEXTURE_2D);
-		glBindTexture(GL_TEXTURE_2D, texture.getTextureID());
-		glBegin(GL_QUADS);
-		glTexCoord2f(0, 0); // top left
-		glVertex2f(pos.getX(), pos.getY());
-		glTexCoord2f(0, 1); // bottom left 
-		glVertex2f(pos.getX(), texture.getImageHeight() + pos.getY());
-		glTexCoord2f(1, 1); // bottom right
-		glVertex2f(texture.getImageWidth() + pos.getX(), texture.getImageHeight() + pos.getY());
-		glTexCoord2f(1, 0); // top right
-		glVertex2f(texture.getImageWidth() + pos.getX(), pos.getY());
-		glEnd();
-		glDisable(GL_TEXTURE_2D);
 		texture.bind();
-		Render.drawTexturedRectangle(pos.getX(), pos.getY(), 0, 0, texture);
-		new Color(1f, 1f, 1f, 0.1f).bind();
+		Render.drawScaledTexturedRectangle(pos.getX(), pos.getY(), width, height, texture);
+		new Color(1f, 1f, 1f, 0.4f).bind();
 		if(isHover && !isClicked) glRecti(pos.getX(), pos.getY(), pos.getX() + getButtonWidth(), pos.getY() + getButtonHeight());
 		new Color(0.6f, 0f, 0f, 0.3f).bind();
 		if(isClicked) glRecti(pos.getX(), pos.getY(), pos.getX() + getButtonWidth(), pos.getY() + getButtonHeight());
