@@ -24,7 +24,14 @@ public class MainMenu
 	public Button play = new Button(new Vector2D(15, 70), 2f, 2f, "Play");
 	public Button options = new Button(new Vector2D(15, 70 + play.getButtonHeight() + 4), 2f, 2f, "Options");
 	public Button credits = new Button(new Vector2D(15, 70 + play.getButtonHeight() * 2 + 8), 2f, 2f, "Credits");
-	public Button exit = new Button(new Vector2D(15, 70 + play.getButtonHeight() * 3 + 12), 2f, 2f, "Exit");
+	public Button exit = new Button(new Vector2D(15, 70 + play.getButtonHeight() * 3 + 12), 2f, 2f, "Exit")
+	{
+		public void onButtonClicked()
+		{
+			super.onButtonClicked();
+			Main.gameInstance.close();
+		}
+	};
 	
 	public synchronized List<GUIComponent> getGUIComponents()
 	{

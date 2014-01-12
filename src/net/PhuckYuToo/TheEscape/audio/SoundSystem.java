@@ -7,12 +7,23 @@ import org.newdawn.slick.util.ResourceLoader;
 
 public class SoundSystem
 {
+	public SoundSystem()
+	{
+		Sound.values();
+		Music.values();
+	}
+	
+	public void playSound(Sound sound, float pitch, float gain, boolean loop)
+	{
+		sound.playSound(pitch, gain, loop);
+	}
+	
 	public enum Sound
 	{
 		SCP096_CRY("096_cry"), SCP096_SCREAM("096_scream"), SCP127("127"),
 		ABLE1("able1"), ABLE2("able2"), ABLE_DOOR("abledoor"), ALARM("alarm"),
 		BEHIND_YOU("behindyou"), BRASS1("brass1"), BRASS2("brass2"), BRASS3("brass3"),
-		CLICK_SETTING("click_setting"), CLICK("click"), COWBELL("cowbell"), DEATH_MTF("death_mtf"),
+		CLICK_SETTING("click_setting1"), CLICK("click"), COWBELL("cowbell"), DEATH_MTF("death_mtf"),
 		FIRE_CRACK("fireCrackling"), FLAME("flame"), FRESHMEAT("FreshMeat"), HURT("hurt"),
 		LOOKUP("lookup"), OLDMAN_DRAG("oldmandrag"), RELOAD("reload_gun"), SHOT("shot"), WORTHOFLIFE("worthoflife");
 		

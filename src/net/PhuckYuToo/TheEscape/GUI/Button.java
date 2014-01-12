@@ -2,9 +2,11 @@ package net.PhuckYuToo.TheEscape.GUI;
 
 import static org.lwjgl.opengl.GL11.*;
 import java.util.Random;
+
+import net.DarkKnight.TheEscape.render.Render;
 import net.PhuckYuToo.TheEscape.Main;
 import net.PhuckYuToo.TheEscape.Vector2D;
-import net.PhuckYuToo.TheEscape.audio.SoundSystem;
+import net.PhuckYuToo.TheEscape.audio.SoundSystem.Sound;
 
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.Color;
@@ -51,6 +53,9 @@ public class Button extends GUIComponent
 	{
 		if(isMouseOver()) isHover = true;
 		else isHover = false;
+		
+		if(isHover && Mouse.isButtonDown(0)) isClicked = true;
+		else isClicked = false;
 		if(Mouse.isButtonDown(0) && isMouseOver()){
 			isClicked = true;
 			hasBeenClicked = true;
@@ -61,7 +66,7 @@ public class Button extends GUIComponent
 	
 	public void onButtonClicked()
 	{
-		SoundSystem.Sound.CLICK.playSound(1f, 1f, false);
+		Main.soundSystem.playSound(Sound.CLICK, 1f, Options.SOUND_VOL, false);
 	}
 	
 	public void render()
@@ -70,17 +75,7 @@ public class Button extends GUIComponent
 		glScalef(width, height, 0f);
 		glEnable(GL_TEXTURE_2D);
 		texture.bind();
-		glBegin(GL_QUADS);
-		glTexCoord2f(0, 0); // top left
-		glVertex2f(pos.getX(), pos.getY());
-		glTexCoord2f(0, 1); // bottom left 
-		glVertex2f(pos.getX(), texture.getImageHeight() + pos.getY());
-		glTexCoord2f(1, 1); // bottom right
-		glVertex2f(texture.getImageWidth() + pos.getX(), texture.getImageHeight() + pos.getY());
-		glTexCoord2f(1, 0); // top right
-		glVertex2f(texture.getImageWidth() + pos.getX(), pos.getY());
-		glEnd();
-		glDisable(GL_TEXTURE_2D);
+		Render.drawTexturedRectangle(pos.getX(), pos.getY(), 0, 0, texture);
 		new Color(1f, 1f, 1f, 0.1f).bind();
 		if(isHover && !isClicked) glRecti(pos.getX(), pos.getY(), pos.getX() + getButtonWidth(), pos.getY() + getButtonHeight());
 		new Color(0.6f, 0f, 0f, 0.3f).bind();
@@ -102,5 +97,10 @@ public class Button extends GUIComponent
 	public int getButtonWidth()
 	{
 		return texture.getTextureWidth();
+	}
+	
+	public boolean isClicked()
+	{
+		return isClicked;
 	}
 }
