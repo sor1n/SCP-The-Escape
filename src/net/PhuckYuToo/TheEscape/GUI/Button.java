@@ -72,10 +72,9 @@ public class Button extends GUIComponent
 	public void render()
 	{
 		glPushMatrix();
-		glScalef(width, height, 0f);
 		glEnable(GL_TEXTURE_2D);
 		texture.bind();
-		Render.drawTexturedRectangle(pos.getX(), pos.getY(), 0, 0, texture);
+		Render.drawScaledTexturedRectangle(pos.getX(), pos.getY(), width, height, texture);
 		new Color(1f, 1f, 1f, 0.1f).bind();
 		if(isHover && !isClicked) glRecti(pos.getX(), pos.getY(), pos.getX() + getButtonWidth(), pos.getY() + getButtonHeight());
 		new Color(0.6f, 0f, 0f, 0.3f).bind();
