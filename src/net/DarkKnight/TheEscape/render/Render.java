@@ -2,14 +2,12 @@ package net.DarkKnight.TheEscape.render;
 
 import static org.lwjgl.opengl.GL11.GL_QUADS;
 import static org.lwjgl.opengl.GL11.*;
-
 import org.newdawn.slick.opengl.Texture;
 
 public class Render 
 {
 	public static void drawRectangle(float x, float y, int sizeX, int sizeY, float red, float green, float blue)
 	{
-		glColor3f(1f, 1f, 1f);
 		glPushMatrix();
 		glColor3f(red, green, blue);
 		glBegin(GL_QUADS);
@@ -27,7 +25,6 @@ public class Render
 	
 	public static void drawTexturedRectangle(float x, float y, Texture tex)
 	{
-		glColor3f(1f, 1f, 1f);
 		glPushMatrix();
 		glBegin(GL_QUADS);
 		glTexCoord2f(0, 0); // top left
