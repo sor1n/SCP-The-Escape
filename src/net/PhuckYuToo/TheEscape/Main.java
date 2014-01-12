@@ -303,7 +303,7 @@ public class Main
 
 			if(targetDisplayMode == null)
 			{
-				consoleError("Failed to find value mode: "+width+"x"+height+" fs="+fullscreen);
+				consoleError("Failed to find value mode: " + width + "x" + height + " fs=" + fullscreen);
 				return;
 			}
 			Display.setDisplayMode(targetDisplayMode);
@@ -311,7 +311,7 @@ public class Main
 		} 
 		catch(LWJGLException e)
 		{
-			consoleError("Unable to setup mode "+ width + "x" + height + " fullscreen="+fullscreen + e);
+			consoleError("Unable to setup mode "+ width + "x" + height + " fullscreen=" + fullscreen + e);
 		}
 	}
 

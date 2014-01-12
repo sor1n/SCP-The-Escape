@@ -3,6 +3,8 @@ package net.PhuckYuToo.TheEscape.GUI;
 import static org.lwjgl.opengl.GL11.*;
 
 import java.util.Random;
+
+import net.DarkKnight.TheEscape.render.Render;
 import net.PhuckYuToo.TheEscape.Main;
 import net.PhuckYuToo.TheEscape.Vector2D;
 import net.PhuckYuToo.TheEscape.audio.SoundSystem.Sound;
@@ -76,6 +78,7 @@ public class Button extends GUIComponent
 		glPushMatrix();
 		glScalef(width, height, 0f);
 		glEnable(GL_TEXTURE_2D);
+<<<<<<< HEAD
 		glBindTexture(GL_TEXTURE_2D, texture.getTextureID());
 		glBegin(GL_QUADS);
 		glTexCoord2f(0, 0); // top left
@@ -88,6 +91,10 @@ public class Button extends GUIComponent
 		glVertex2f(texture.getImageWidth() + pos.getX(), pos.getY());
 		glEnd();
 		glDisable(GL_TEXTURE_2D);
+=======
+		texture.bind();
+		Render.drawTexturedRectangle(pos.getX(), pos.getY(), 0, 0, texture);
+>>>>>>> a14a153e7a416b93ad6c6fc7f82e0f9d24a71c83
 		new Color(1f, 1f, 1f, 0.1f).bind();
 		if(isHover && !isClicked) glRecti(pos.getX(), pos.getY(), pos.getX() + getButtonWidth(), pos.getY() + getButtonHeight());
 		new Color(0.6f, 0f, 0f, 0.3f).bind();
