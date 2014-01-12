@@ -9,6 +9,7 @@ public class Render
 {
 	public static void drawRectangle(float x, float y, int sizeX, int sizeY, float red, float green, float blue)
 	{
+		glColor3f(1f, 1f, 1f);
 		glPushMatrix();
 		glColor3f(red, green, blue);
 		glBegin(GL_QUADS);
@@ -26,6 +27,7 @@ public class Render
 	
 	public static void drawTexturedRectangle(float x, float y, int sizeX, int sizeY, Texture tex)
 	{
+		glColor3f(1f, 1f, 1f);
 		glPushMatrix();
 		glBegin(GL_QUADS);
 		glTexCoord2f(0, 0); // top left
