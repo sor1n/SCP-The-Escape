@@ -1,4 +1,4 @@
-package net.DarkKnight.TheEscape.render;
+package net.TheEscape.Client.render;
 
 import static org.lwjgl.opengl.GL11.GL_QUADS;
 import static org.lwjgl.opengl.GL11.*;

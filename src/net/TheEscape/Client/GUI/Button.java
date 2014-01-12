@@ -4,10 +4,10 @@ import static org.lwjgl.opengl.GL11.*;
 
 import java.util.Random;
 
-import net.DarkKnight.TheEscape.render.Render;
 import net.TheEscape.Client.Main;
 import net.TheEscape.Client.Vector2D;
 import net.TheEscape.Client.audio.SoundSystem.Sound;
+import net.TheEscape.Client.render.Render;
 
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.Color;
