@@ -66,7 +66,7 @@ public class Button extends GUIComponent
 	
 	public void onButtonClicked()
 	{
-		Main.soundSystem.playSound(Sound.CLICK, 1f, Options.SOUND_VOL, false);
+		Sound.CLICK.playSound(1f, Options.SOUND_VOL, false);
 	}
 	
 	public void render()

@@ -63,12 +63,15 @@ public class Main
 
 	//Declaration
 	public static MainMenu menu;
+	public static Options optionsMenu;
 	public static SoundSystem soundSystem;
 
 	public void init()
 	{
 		soundSystem = new SoundSystem();
 		menu = new MainMenu();
+		optionsMenu = new Options();
+		menu.setActive(true);
 	}
 
 	public void initGL()
@@ -136,6 +139,7 @@ public class Main
 	public void tick(int delta)
 	{
 		if(menu != null) menu.tick(delta);
+		if(optionsMenu != null) optionsMenu.tick(delta);
 		soundSystem.tick(delta);
 		while(Keyboard.isCreated() && Keyboard.next())
 		{
@@ -156,6 +160,7 @@ public class Main
 	public void render()
 	{
 		if(menu != null) menu.render();
+		if(optionsMenu != null) optionsMenu.render();
 	}
 
 	public static void main(String args[])
