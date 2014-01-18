@@ -10,10 +10,10 @@ public class Tile
 {
 	public static final int TILE_SIZE = 16;
 	
-	private String name, path;
+	private String name;
 	private Texture texture;
 	
-	public static final Texture TEX_MARBLE = initTexture(Main.PATH, "Marble");
+	public static final Texture TEX_MARBLE = initTexture("Marble");
 	
 	public static final Tile AIR = new Tile("Air").setTexture(null);
 	public static final Tile MARBLE = new Tile("Marble").setTexture(TEX_MARBLE);
@@ -28,17 +28,6 @@ public class Tile
 	public String getName()
 	{
 		return name;
-	}
-	
-	public String getPath()
-	{
-		return path;
-	}
-	
-	public Tile setPath(String path)
-	{
-		this.path = path;
-		return this;
 	}
 	
 	public boolean hasTexture()
@@ -57,7 +46,7 @@ public class Tile
 		return texture;
 	}
 	
-	public static Texture initTexture(String path, String name)
+	public static Texture initTexture(String name)
 	{
 		return Main.loadPNG(name, "tiles");
 	}
