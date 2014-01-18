@@ -63,7 +63,7 @@ public class Main
 	/** last fps time */
 	private long lastFPS;
 
-	public static final String TITLE = "SCP - The Escape", VERSION = "v0.4";
+	public static final String TITLE = "SCP - The Escape", VERSION = "v0.4", PATH = "scptheescape";
 	/** is VSync Enabled */
 	boolean vsync;
 
@@ -103,7 +103,7 @@ public class Main
 		{
 			setDisplayMode(WIDTH, HEIGHT, false);
 			Display.setTitle(TITLE);
-			Display.setIcon(new ByteBuffer[]{new ImageIOImageData().imageToByteBuffer(ImageIO.read(new File("res/Icon.png")), false, false, null)});
+			Display.setIcon(new ByteBuffer[]{new ImageIOImageData().imageToByteBuffer(ImageIO.read(new File("res/scptheescape/gui/Icon.png")), false, false, null)});
 			Display.create();
 		}
 		catch(Exception e)
@@ -333,11 +333,11 @@ public class Main
 		}
 	}
 
-	public static Texture loadPNG(String name)
+	public static Texture loadPNG(String name, String type)
 	{
 		try
 		{
-			Texture texture = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("res/" + name + ".png"));
+			Texture texture = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("res/" + PATH + "/" + type + "/" + name + ".png"));
 			//			consoleMessage("Texture loaded: "+ texture);
 			//			consoleMessage(">> Image width: "+ texture.getImageWidth());
 			//			consoleMessage(">> Image height: "+ texture.getImageHeight());

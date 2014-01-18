@@ -15,7 +15,7 @@ public class Sheet
 	public Sheet(String path)
 	{
 		this.path = path;
-		texture = Main.loadPNG(path);
+		texture = Main.loadPNG(path, "tiles");
 	}
 
 	public String getPath()

@@ -1,5 +1,6 @@
 package net.TheEscape.Client.audio;
 
+import net.TheEscape.Client.Main;
 import net.TheEscape.Client.GUI.Options;
 
 import org.newdawn.slick.openal.Audio;
@@ -46,7 +47,7 @@ public class SoundSystem
 				// or setting up a stream to read from. Note that the argument becomes
 				// a URL here so it can be reopened when the stream is complete. Probably
 				// should have reset the stream by thats not how the original stuff worked
-				ogg = AudioLoader.getStreamingAudio("OGG", ResourceLoader.getResource("sounds/" + path + ".ogg"));
+				ogg = AudioLoader.getStreamingAudio("OGG", ResourceLoader.getResource(Main.PATH + "/sounds/" + path + ".ogg"));
 			} 
 			catch(Exception e) {}
 		}
@@ -113,7 +114,7 @@ public class SoundSystem
 				// or setting up a stream to read from. Note that the argument becomes
 				// a URL here so it can be reopened when the stream is complete. Probably
 				// should have reset the stream by thats not how the original stuff worked
-				ogg = AudioLoader.getStreamingAudio("OGG", ResourceLoader.getResource("sounds/music/" + path + ".ogg"));
+				ogg = AudioLoader.getStreamingAudio("OGG", ResourceLoader.getResource(Main.PATH + "/sounds/music/" + path + ".ogg"));
 			} 
 			catch(Exception e) {}
 		}

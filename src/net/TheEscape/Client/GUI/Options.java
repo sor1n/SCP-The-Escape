@@ -82,7 +82,7 @@ public class Options extends GUI
 
 	public Options()
 	{
-		bg = Main.loadPNG("Main");
+		bg = Main.loadPNG("Main", "gui");
 		soundVol.add();
 		musicVol.add();
 		back.add();

@@ -79,8 +79,8 @@ public class MainMenu extends GUI
 
 	public MainMenu()
 	{
-		bg = Main.loadPNG("Main");
-		bar = Main.loadPNG("Bar");
+		bg = Main.loadPNG("Main", "gui");
+		bar = Main.loadPNG("Bar", "gui");
 		textureX = -bar.getTextureWidth();
 		titleX = Main.WIDTH;
 		play.add();

@@ -31,8 +31,8 @@ public class Button extends GUIComponent
 		this.pos = pos;
 		text = txt;
 		textures = new Texture[4];
-		textures[0] = Main.loadPNG("button");
-		for(int i = 1; i < textures.length; i++) textures[i] = Main.loadPNG("button" + i);
+		textures[0] = Main.loadPNG("button", "gui");
+		for(int i = 1; i < textures.length; i++) textures[i] = Main.loadPNG("button" + i, "gui");
 		texture = textures[new Random().nextInt(textures.length)];
 	}
 

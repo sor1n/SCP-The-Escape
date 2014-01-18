@@ -10,20 +10,36 @@ public class Tile
 {
 	public static final int TILE_SIZE = 16;
 	
-	public static final Texture TEX_MARBLE = initTexture("Marble");
+	private String name, path;
+	private Texture texture;
+	
+	public static final Texture TEX_MARBLE = initTexture(Main.PATH, "Marble");
 	
 	public static final Tile AIR = new Tile("Air").setTexture(null);
 	public static final Tile MARBLE = new Tile("Marble").setTexture(TEX_MARBLE);
 	
-	private String name;
-	private Texture texture;
-	
-	public Tile(String path)
+	public Tile(String name)
 	{
-		this.name = path;
+		this.name = name;
 	}
 	
 	public void tick(int delta){}
+	
+	public String getName()
+	{
+		return name;
+	}
+	
+	public String getPath()
+	{
+		return path;
+	}
+	
+	public Tile setPath(String path)
+	{
+		this.path = path;
+		return this;
+	}
 	
 	public boolean hasTexture()
 	{
@@ -36,19 +52,14 @@ public class Tile
 		return this;
 	}
 	
-	public void render(int x, int y)
-	{
-		if(hasTexture()) Render.drawTile(x * Tile.TILE_SIZE, y * Tile.TILE_SIZE, this, 5.5f);
-	}
-	
-	public String getName()
-	{
-		return name;
-	}
-	
 	public Texture getTexture()
 	{
 		return texture;
+	}
+	
+	public static Texture initTexture(String path, String name)
+	{
+		return Main.loadPNG(name, "tiles");
 	}
 	
 	public boolean onScreen(Vector2Dd cam, int x, int y)
@@ -57,8 +68,8 @@ public class Tile
 		else return false;
 	}
 	
-	public static Texture initTexture(String path)
+	public void render(int x, int y)
 	{
-		return Main.loadPNG("tiles/" + path);
+		if(hasTexture()) Render.drawTile(x * Tile.TILE_SIZE, y * Tile.TILE_SIZE, this, 5.5f);
 	}
 }
