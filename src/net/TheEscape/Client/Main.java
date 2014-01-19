@@ -333,11 +333,11 @@ public class Main
 		}
 	}
 
-	public static Texture loadPNG(String name, String type)
+	public static Texture loadPNG(String path, String name, String type)
 	{
 		try
 		{
-			Texture texture = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("res/" + PATH + "/" + type + "/" + name + ".png"));
+			Texture texture = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("res/" + path + "/" + type + "/" + name + ".png"));
 			//			consoleMessage("Texture loaded: "+ texture);
 			//			consoleMessage(">> Image width: "+ texture.getImageWidth());
 			//			consoleMessage(">> Image height: "+ texture.getImageHeight());

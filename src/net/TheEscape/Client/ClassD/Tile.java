@@ -11,12 +11,13 @@ public class Tile
 	public static final int TILE_SIZE = 16;
 	
 	private String name;
+	private static String path;
 	private Texture texture;
 	
 	public static final Texture TEX_MARBLE = initTexture("Marble");
 	
-	public static final Tile AIR = new Tile("Air").setTexture(null);
-	public static final Tile MARBLE = new Tile("Marble").setTexture(TEX_MARBLE);
+	public static final Tile AIR = new Tile("Air").setPath(Main.PATH).setTexture(null);
+	public static final Tile MARBLE = new Tile("Marble").setPath(Main.PATH).setTexture(TEX_MARBLE);
 	
 	public Tile(String name)
 	{
@@ -28,6 +29,17 @@ public class Tile
 	public String getName()
 	{
 		return name;
+	}
+	
+	public static String getPath()
+	{
+		return path;
+	}
+
+	public Tile setPath(String path)
+	{
+		Tile.path = path;
+		return this;
 	}
 	
 	public boolean hasTexture()
@@ -48,7 +60,7 @@ public class Tile
 	
 	public static Texture initTexture(String name)
 	{
-		return Main.loadPNG(name, "tiles");
+		return Main.loadPNG(getPath(), name, "tiles");
 	}
 	
 	public boolean onScreen(Vector2Dd cam, int x, int y)

@@ -7,20 +7,20 @@ import org.newdawn.slick.opengl.Texture;
 
 public class Sheet 
 {
-	private String path;
+	private String name;
 	private Texture texture;
 
 	public static final Sheet TILE_SCP = new Sheet("Tile_SCPs");
 
-	public Sheet(String path)
+	public Sheet(String name)
 	{
-		this.path = path;
-		texture = Main.loadPNG(path, "tiles");
+		this.name = name;
+		texture = Main.loadPNG(Main.PATH, name, "tiles");
 	}
 
-	public String getPath()
+	public String getName()
 	{
-		return path;
+		return name;
 	}
 
 	//	public Texture getSheet()
