@@ -28,6 +28,7 @@ public class Render
 	
 	public static void drawTile(float x, float y, Tile tile, float scale)
 	{
+		glPushMatrix();
 		glColor3f(1f, 1f, 1f);
 		glPushMatrix();
 		glLoadIdentity();
@@ -37,14 +38,15 @@ public class Render
 		tile.getTexture().bind();
 		glBegin(GL_QUADS);
 		glTexCoord2f(0, 0); // top left
-		glVertex2f(x, y);
+		glVertex2f(x - Tile.TILE_SIZE, y - Tile.TILE_SIZE);
 		glTexCoord2f(0, 1); // bottom left 
-		glVertex2f(x, y + Tile.TILE_SIZE);
+		glVertex2f(x - Tile.TILE_SIZE, y);
 		glTexCoord2f(1, 1); // bottom right
-		glVertex2f(x + Tile.TILE_SIZE, y + Tile.TILE_SIZE);
+		glVertex2f(x, y);
 		glTexCoord2f(1, 0); // top right
-		glVertex2f(x + Tile.TILE_SIZE, y);
+		glVertex2f(x, y - Tile.TILE_SIZE);
 		glEnd();
+		glPopMatrix();
 	}
 	
 	public static void drawTriangle(float x, float y, int sizeX, int sizeY, float r, float g, float b, float angle, float rX, float rY, float rZ)

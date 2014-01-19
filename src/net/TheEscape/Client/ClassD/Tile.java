@@ -11,17 +11,18 @@ public class Tile
 	public static final int TILE_SIZE = 16;
 	
 	private String name;
-	private static String path;
 	private Texture texture;
 	
-	public static final Texture TEX_MARBLE = initTexture("Marble");
+//	public static final Texture TEX_MARBLE = initTexture("Marble");
 	
-	public static final Tile AIR = new Tile("Air").setPath(Main.PATH).setTexture(null);
-	public static final Tile MARBLE = new Tile("Marble").setPath(Main.PATH).setTexture(TEX_MARBLE);
+	public static final Tile AIR = new Tile("Air", Main.PATH, false);
+	public static final Tile MARBLE = new Tile("Marble", Main.PATH, true);
 	
-	public Tile(String name)
+	public Tile(String name, String path, boolean hasTexture)
 	{
 		this.name = name;
+		if(hasTexture) texture = initTexture(name, path);
+		else texture = null;
 	}
 	
 	public void tick(int delta){}
@@ -29,17 +30,6 @@ public class Tile
 	public String getName()
 	{
 		return name;
-	}
-	
-	public static String getPath()
-	{
-		return path;
-	}
-
-	public Tile setPath(String path)
-	{
-		Tile.path = path;
-		return this;
 	}
 	
 	public boolean hasTexture()
@@ -58,9 +48,9 @@ public class Tile
 		return texture;
 	}
 	
-	public static Texture initTexture(String name)
+	public static Texture initTexture(String name, String path)
 	{
-		return Main.loadPNG(getPath(), name, "tiles");
+		return Main.loadPNG(path, name, "tiles");
 	}
 	
 	public boolean onScreen(Vector2Dd cam, int x, int y)
@@ -68,7 +58,7 @@ public class Tile
 		if(Main.intBetween(x * Tile.TILE_SIZE, (int)cam.getX(), (int)cam.getX() + Main.WIDTH) && Main.intBetween(y * Tile.TILE_SIZE, (int)cam.getY(), (int)cam.getY() + Main.HEIGHT)) return true;
 		else return false;
 	}
-	
+
 	public void render(int x, int y)
 	{
 		if(hasTexture()) Render.drawTile(x * Tile.TILE_SIZE, y * Tile.TILE_SIZE, this, 5.5f);

@@ -51,6 +51,7 @@ public class World
 		if(Keyboard.isKeyDown(Keyboard.KEY_LEFT)) cam.addX(-0.1D);
 		if(Keyboard.isKeyDown(Keyboard.KEY_UP)) cam.addY(-0.1D);
 		if(Keyboard.isKeyDown(Keyboard.KEY_DOWN)) cam.addY(0.1D);
+		System.out.println(cam.getX());
 	}
 	int hi = 0;
 	public void render()
@@ -63,8 +64,10 @@ public class World
 
 	public void renderBackground()
 	{
+		GL11.glPushMatrix();
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		Render.drawRectangle(0, 0, Main.WIDTH, Main.HEIGHT, 0.02f, 0.01f, 0.1f);
+		GL11.glPopMatrix();
 	}
 
 	public boolean isInWorld(int x, int y)
